@@ -1,0 +1,46 @@
+# 智慧居 · SmartHome AI Agent — 应用容器
+#
+#   docker compose up -d --build        # 首次构建并启动
+#   docker compose logs -f app          # 查看日志
+#   docker compose down                 # 停止（保留数据卷）
+#
+# 可选：同时使用 Milvus（先启动向量库，再启动应用）
+#   docker compose -f docker-compose.milvus.yml up -d
+#   在 backend/.env 中设置 VECTOR_STORE=milvus
+#
+# 端口、Milvus 地址、时区等 Compose 变量可写在项目根目录的 .env 中。
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: smarthome-ai-agent:latest
+    container_name: smarthome-agent
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    # backend/.env 与本地 Python 启动共用；文件不存在时使用内置默认值
+    env_file:
+      - path: backend/.env
+        required: false
+    environment:
+      # 容器内通过宿主机端口访问 docker-compose.milvus.yml 启动的 Milvus
+      MILVUS_URI: ${MILVUS_URI:-http://host.docker.internal:19530}
+      TZ: ${TZ:-Asia/Shanghai}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - smarthome-data:/app/backend/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  smarthome-data:

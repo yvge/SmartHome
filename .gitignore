@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# Runtime data
+backend/data/*.db
+backend/data/*.db-wal
+backend/data/*.db-shm
+backend/data/vector_cache.json
+backend/logs/
+logs/
+
+# Environment
+.env
+backend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Editors / OS / local tooling
+.claude/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local QA artifacts
+screenshots/debug-*
+screenshots/crop_*
+scripts/debug_*
+scripts/inspect_ui.mjs
+scripts/ui_check.mjs

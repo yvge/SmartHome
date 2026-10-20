@@ -1,0 +1,25 @@
+# 构建上下文只需要 backend/ 与 frontend/ 源码
+.git
+.gitignore
+.claude
+.idea
+.vscode
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+backend/.venv
+backend/.env
+backend/data
+backend/logs
+backend/tests
+frontend/node_modules
+frontend/dist
+frontend/.vite
+screenshots
+docs
+*.md
+start.bat
+start.sh
+docker-compose*.yml
+Dockerfile
+.dockerignore

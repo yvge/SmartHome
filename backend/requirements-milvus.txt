@@ -1,0 +1,5 @@
+# 可选：启用真实 Milvus 向量库
+# docker compose -f ../docker-compose.milvus.yml up -d
+# pip install -r requirements-milvus.txt
+# 然后在 .env 中设置 VECTOR_STORE=milvus
+pymilvus>=2.5.0

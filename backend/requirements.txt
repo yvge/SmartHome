@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic>=2.7
+pydantic-settings>=2.3
+openai>=1.40
+langgraph>=0.2.60
+numpy>=1.26
+python-dotenv
+pytest
+pytest-asyncio
+httpx
