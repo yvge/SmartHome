@@ -2,23 +2,18 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  Activity,
-  AirVent,
   ArrowDown,
   ArrowUp,
-  BookOpen,
   Brain,
   ChevronRight,
   Database,
   Droplets,
   History,
   Home,
-  Lightbulb,
   Loader2,
   MessageSquare,
   Mic,
   Plus,
-  Sparkles,
   Square,
   Thermometer,
   Trash2,
@@ -52,28 +47,20 @@ let recognition: any = null
 
 const prompts = [
   {
-    icon: Lightbulb,
     title: '打开客厅主灯，亮度调到 80%',
-    hint: '设备控制 · Function Calling',
-    tone: 'mint',
+    hint: '说一句，灯就亮',
   },
   {
-    icon: AirVent,
     title: '空调调到 26 度',
-    hint: '多轮澄清 · 上下文记忆',
-    tone: 'indigo',
+    hint: '带记忆的多轮对话',
   },
   {
-    icon: Home,
     title: '开启回家模式',
-    hint: 'LangGraph 多步场景编排',
-    tone: 'amber',
+    hint: '一连串动作，自动完成',
   },
   {
-    icon: BookOpen,
     title: '空调多少度最省电？',
-    hint: 'RAG 知识检索与问答',
-    tone: 'blue',
+    hint: '从知识库里找答案',
   },
 ]
 
@@ -322,12 +309,12 @@ onBeforeUnmount(() => {
       <header class="chat-head">
         <div class="chat-identity">
           <div class="identity-orb">
-            <Sparkles :size="18" />
+            <Home :size="17" />
           </div>
           <div class="identity-copy">
             <div class="identity-name">
               小居
-              <span class="identity-badge">AI HOUSEHOLD AGENT</span>
+              <span class="identity-badge">家庭管家</span>
             </div>
             <div class="identity-meta">
               <span class="live-dot"></span>
@@ -356,26 +343,18 @@ onBeforeUnmount(() => {
         </div>
 
         <div v-else-if="!chat.messages.length" class="welcome">
-          <div class="welcome-orb">
-            <div class="welcome-ring one"></div>
-            <div class="welcome-ring two"></div>
-            <div class="welcome-core"><Sparkles :size="26" /></div>
-          </div>
-          <div class="welcome-kicker">SMART HOME · AGENT CONSOLE</div>
+          <div class="welcome-kicker">小居 · 家庭 AI 管家</div>
           <h1>今天想让家里<br />变成什么样？</h1>
-          <p class="welcome-sub">
-            用一句话描述你的需求，小居会先理解意图、检索知识，再调用设备或编排整段场景。
-          </p>
+          <p class="welcome-sub">说一句话，我来理解、检索，再把设备与场景安排妥当。</p>
 
           <div class="welcome-prompts">
             <button
-              v-for="prompt in prompts"
+              v-for="(prompt, index) in prompts"
               :key="prompt.title"
               class="welcome-prompt"
-              :class="prompt.tone"
               @click="usePrompt(prompt.title)"
             >
-              <div class="prompt-icon"><component :is="prompt.icon" :size="17" /></div>
+              <span class="prompt-index mono">{{ String(index + 1).padStart(2, '0') }}</span>
               <div class="prompt-copy">
                 <span class="prompt-title">{{ prompt.title }}</span>
                 <span class="prompt-hint">{{ prompt.hint }}</span>
@@ -384,12 +363,7 @@ onBeforeUnmount(() => {
             </button>
           </div>
 
-          <div class="welcome-caps">
-            <span><Zap :size="11" /> 10 个 JSON Schema 工具</span>
-            <span><Brain :size="11" /> LangGraph 动态路径</span>
-            <span><Database :size="11" /> Milvus / 本地向量库</span>
-            <span><Activity :size="11" /> SSE 实时轨迹</span>
-          </div>
+          <p class="welcome-note">支持 设备控制 · 场景编排 · 知识问答 · 状态查询</p>
         </div>
 
         <div v-else class="message-list">
@@ -460,7 +434,6 @@ onBeforeUnmount(() => {
       <section class="panel side-panel">
         <div class="side-head">
           <div>
-            <div class="panel-kicker">Agent Context</div>
             <div class="panel-title small">本轮上下文</div>
           </div>
           <span class="chip" :class="chat.streaming ? 'mint' : 'neutral'">
@@ -513,8 +486,7 @@ onBeforeUnmount(() => {
       <section class="panel side-panel">
         <div class="side-head">
           <div>
-            <div class="panel-kicker">Retrieval</div>
-            <div class="panel-title small">RAG 召回</div>
+            <div class="panel-title small">知识召回</div>
           </div>
           <span v-if="latestRetrieval" class="side-latency mono">{{ latestRetrieval.latency_ms.toFixed(1) }}ms</span>
         </div>
@@ -543,7 +515,6 @@ onBeforeUnmount(() => {
       <section v-if="latestTools.length" class="panel side-panel">
         <div class="side-head">
           <div>
-            <div class="panel-kicker">Tool Calls</div>
             <div class="panel-title small">工具调用</div>
           </div>
           <Wrench :size="13" class="dim" />
@@ -563,7 +534,6 @@ onBeforeUnmount(() => {
       <section class="panel side-panel environment-side">
         <div class="side-head">
           <div>
-            <div class="panel-kicker">Live Snapshot</div>
             <div class="panel-title small">环境快照</div>
           </div>
           <span class="live-dot"></span>
@@ -583,7 +553,6 @@ onBeforeUnmount(() => {
           <div class="history-panel" role="dialog" aria-modal="true" aria-label="历史对话">
             <header class="history-head">
               <div>
-                <div class="panel-kicker">Conversation History</div>
                 <h3>历史对话</h3>
               </div>
               <button class="icon-btn sm" aria-label="关闭" @click="closeHistory">
@@ -633,7 +602,7 @@ onBeforeUnmount(() => {
   min-height: 0;
   max-width: 1560px;
   margin: 0 auto;
-  padding: 18px 22px 18px;
+  padding: 20px 30px 20px;
 }
 
 .chat-shell {
@@ -649,7 +618,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 13px 18px;
+  padding: 14px 22px;
   border-bottom: 1px solid var(--line);
   flex: 0 0 auto;
 }
@@ -665,12 +634,11 @@ onBeforeUnmount(() => {
   width: 38px;
   height: 38px;
   flex: 0 0 38px;
-  border-radius: 12px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  color: #06211d;
-  background: linear-gradient(140deg, var(--mint-bright), #9ba5fa);
-  box-shadow: 0 0 26px rgba(94, 234, 212, 0.16);
+  color: #fbf7f0;
+  background: var(--ink);
 }
 
 .identity-name {
@@ -678,17 +646,16 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 8px;
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .identity-badge {
-  font-family: var(--font-mono);
-  font-size: 7.5px;
+  font-size: 9.5px;
   font-weight: 400;
-  letter-spacing: 0.12em;
-  color: var(--text-4);
-  padding: 2px 5px;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+  padding: 2px 6px;
   border-radius: 4px;
   border: 1px solid var(--line);
 }
@@ -699,7 +666,7 @@ onBeforeUnmount(() => {
   gap: 5px;
   min-width: 0;
   max-width: 100%;
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: var(--text-3);
   margin-top: 1px;
   white-space: nowrap;
@@ -712,7 +679,6 @@ onBeforeUnmount(() => {
   height: 5px;
   border-radius: 50%;
   background: var(--mint);
-  box-shadow: 0 0 8px rgba(94, 234, 212, 0.7);
 }
 
 .dot-sep {
@@ -732,7 +698,7 @@ onBeforeUnmount(() => {
 
 .session-chip {
   max-width: 150px;
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: var(--text-4);
   padding: 3px 7px;
   border-radius: 5px;
@@ -776,126 +742,88 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 18px 0 30px;
-}
-
-.welcome-orb {
-  position: relative;
-  width: 94px;
-  height: 94px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 20px;
-}
-
-.welcome-core {
-  width: 58px;
-  height: 58px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  color: #05201b;
-  background: linear-gradient(145deg, var(--mint-bright), #9ba5fa);
-  box-shadow:
-    0 0 40px rgba(94, 234, 212, 0.22),
-    0 0 90px rgba(139, 149, 248, 0.12);
-  position: relative;
-  z-index: 2;
-}
-
-.welcome-ring {
-  position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  border: 1px solid rgba(94, 234, 212, 0.14);
-  animation: pulse-soft 6s ease-in-out infinite;
-}
-
-.welcome-ring.two {
-  inset: -10px;
-  border-color: rgba(139, 149, 248, 0.08);
-  animation-delay: 1.4s;
+  padding: 10px 0 24px;
 }
 
 .welcome-kicker {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  letter-spacing: 0.22em;
-  color: var(--text-4);
-  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--mint);
+  margin-bottom: 18px;
+}
+
+.welcome-kicker::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin: 0 auto 14px;
+  background: var(--mint);
+  opacity: 0.45;
 }
 
 .welcome h1 {
-  font-size: clamp(28px, 3.2vw, 40px);
-  font-weight: 620;
-  line-height: 1.18;
-  letter-spacing: -0.04em;
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
 }
 
 .welcome-sub {
-  max-width: 480px;
+  max-width: 460px;
   color: var(--text-3);
-  font-size: 12px;
-  line-height: 1.75;
-  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 14px;
 }
 
 .welcome-prompts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  width: min(640px, 100%);
-  margin-top: 24px;
+  width: min(700px, 100%);
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
 }
 
 .welcome-prompt {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 11px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.022);
+  gap: 13px;
+  padding: 14px 4px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   text-align: left;
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.18s ease;
+  transition: background 0.18s ease;
+}
+
+.welcome-prompt:nth-child(odd) {
+  padding-right: 18px;
+  border-right: 1px solid var(--line);
+}
+
+.welcome-prompt:nth-child(even) {
+  padding-left: 18px;
 }
 
 .welcome-prompt:hover {
-  background: rgba(255, 255, 255, 0.045);
-  border-color: var(--line-strong);
-  transform: translateY(-2px);
+  background: rgba(41, 37, 36, 0.025);
 }
 
-.prompt-icon {
-  width: 33px;
-  height: 33px;
-  flex: 0 0 33px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
+.prompt-index {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--text-4);
+  width: 20px;
+  flex: 0 0 20px;
+  transition: color 0.18s ease;
 }
 
-.welcome-prompt.mint .prompt-icon {
+.welcome-prompt:hover .prompt-index {
   color: var(--mint);
-  background: var(--mint-soft);
-}
-
-.welcome-prompt.indigo .prompt-icon {
-  color: var(--indigo);
-  background: var(--indigo-soft);
-}
-
-.welcome-prompt.amber .prompt-icon {
-  color: var(--amber);
-  background: var(--amber-soft);
-}
-
-.welcome-prompt.blue .prompt-icon {
-  color: #7dd3fc;
-  background: rgba(125, 211, 252, 0.09);
 }
 
 .prompt-copy {
@@ -903,47 +831,46 @@ onBeforeUnmount(() => {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
 .prompt-title {
-  font-size: 11.5px;
+  font-size: 13px;
   color: var(--text);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .prompt-hint {
-  font-size: 9px;
+  font-size: 10.5px;
   color: var(--text-4);
-  margin-top: 1px;
 }
 
 .prompt-arrow {
   color: var(--text-4);
   flex: 0 0 auto;
+  opacity: 0.6;
+  transition: transform 0.18s ease, opacity 0.18s ease, color 0.18s ease;
 }
 
-.welcome-caps {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
+.welcome-prompt:hover .prompt-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+  color: var(--mint);
+}
+
+.welcome-note {
   margin-top: 22px;
-  font-size: 8.5px;
+  font-size: 10.5px;
   color: var(--text-4);
-}
-
-.welcome-caps span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  letter-spacing: 0.06em;
 }
 
 /* composer */
 .composer {
   flex: 0 0 auto;
-  padding: 9px 18px 14px;
+  padding: 12px 22px 16px;
   border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(7, 13, 20, 0.2), rgba(7, 13, 20, 0.65));
+  background: transparent;
 }
 
 .voice-live {
@@ -998,21 +925,21 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  padding: 8px 8px 8px 13px;
-  border-radius: 15px;
-  border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.55);
+  padding: 9px 9px 9px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .composer-box:focus-within {
-  border-color: rgba(94, 234, 212, 0.3);
-  box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.05);
+  border-color: var(--mint);
+  box-shadow: 0 0 0 3px rgba(180, 74, 38, 0.08);
 }
 
 .composer-box.listening {
-  border-color: rgba(94, 234, 212, 0.34);
-  box-shadow: 0 0 26px rgba(94, 234, 212, 0.06);
+  border-color: var(--mint);
+  box-shadow: 0 0 0 3px rgba(180, 74, 38, 0.08);
 }
 
 .composer-input {
@@ -1024,9 +951,9 @@ onBeforeUnmount(() => {
   outline: none;
   resize: none;
   color: var(--text);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.65;
-  padding: 3px 0;
+  padding: 4px 0;
 }
 
 .composer-input::placeholder {
@@ -1042,9 +969,9 @@ onBeforeUnmount(() => {
 
 .mic-btn,
 .send-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
   border: 1px solid transparent;
   display: grid;
   place-items: center;
@@ -1053,27 +980,30 @@ onBeforeUnmount(() => {
 
 .mic-btn {
   color: var(--text-3);
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   border-color: var(--line);
 }
 
 .mic-btn:hover {
   color: var(--mint);
   background: var(--mint-soft);
-  border-color: rgba(94, 234, 212, 0.2);
+  border-color: var(--mint-line);
 }
 
 .mic-btn.active {
-  color: #05201b;
+  color: #fffaf5;
   background: var(--mint);
   border-color: transparent;
   animation: pulse-soft 1.4s ease infinite;
 }
 
 .send-btn {
-  color: #05201b;
-  background: linear-gradient(145deg, var(--mint-bright), #3dd6c1);
-  box-shadow: 0 5px 18px rgba(94, 234, 212, 0.17);
+  color: #fffaf5;
+  background: var(--mint);
+}
+
+.send-btn:hover {
+  background: #9c3d1e;
 }
 
 .send-btn:disabled {
@@ -1083,10 +1013,9 @@ onBeforeUnmount(() => {
 }
 
 .send-btn.stop {
-  background: rgba(239, 123, 123, 0.14);
+  background: var(--critical-soft);
   color: var(--critical);
-  border-color: rgba(239, 123, 123, 0.2);
-  box-shadow: none;
+  border-color: rgba(168, 58, 50, 0.2);
 }
 
 .composer-foot {
@@ -1094,14 +1023,14 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 6px 4px 0;
-  font-size: 8.5px;
+  padding: 7px 2px 0;
+  font-size: 10px;
   color: var(--text-4);
 }
 
 .composer-mode {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 9.5px;
   color: var(--text-4);
 }
 
@@ -1122,7 +1051,7 @@ onBeforeUnmount(() => {
   border: 1px solid var(--line-strong);
   background: var(--panel-solid);
   color: var(--text-2);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(60, 45, 30, 0.1);
   z-index: 3;
 }
 
@@ -1141,7 +1070,7 @@ onBeforeUnmount(() => {
 }
 
 .side-panel {
-  padding: 14px;
+  padding: 16px;
 }
 
 .side-head {
@@ -1160,26 +1089,41 @@ onBeforeUnmount(() => {
 .context-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .context-item {
-  padding: 8px 9px;
-  border-radius: 8px;
-  border: 1px solid rgba(148, 178, 209, 0.07);
-  background: rgba(255, 255, 255, 0.018);
+  padding: 9px 2px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+}
+
+.context-item:nth-child(odd) {
+  padding-right: 10px;
+  border-right: 1px solid var(--line);
+}
+
+.context-item:nth-child(even) {
+  padding-left: 12px;
+}
+
+.context-item:nth-child(n + 3) {
+  border-bottom: none;
 }
 
 .context-item span {
-  font-size: 8.5px;
+  font-size: 9.5px;
   color: var(--text-4);
 }
 
 .context-item strong {
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--text-2);
 }
@@ -1221,7 +1165,7 @@ onBeforeUnmount(() => {
 }
 
 .intent-name {
-  font-size: 8.5px;
+  font-size: 9.5px;
   color: var(--text-4);
   margin-top: 2px;
 }
@@ -1229,7 +1173,7 @@ onBeforeUnmount(() => {
 .confidence-bar {
   height: 2px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(41, 37, 36, 0.06);
   margin-top: 7px;
   overflow: hidden;
 }
@@ -1257,12 +1201,12 @@ onBeforeUnmount(() => {
 }
 
 .intent-action {
-  font-size: 8.5px;
+  font-size: 9.5px;
   color: var(--text-2);
-  padding: 2px 6px;
+  padding: 3px 7px;
   border-radius: 4px;
-  background: rgba(94, 234, 212, 0.05);
-  border: 1px solid rgba(94, 234, 212, 0.08);
+  background: rgba(180, 74, 38, 0.05);
+  border: 1px solid rgba(180, 74, 38, 0.1);
   line-height: 1.5;
 }
 
@@ -1277,7 +1221,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 9.5px;
+  font-size: 10.5px;
   line-height: 1.6;
   color: var(--text-4);
   padding: 8px 0;
@@ -1338,7 +1282,7 @@ onBeforeUnmount(() => {
 .retrieval-bar {
   height: 2px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(41, 37, 36, 0.05);
   overflow: hidden;
 }
 
@@ -1433,8 +1377,8 @@ onBeforeUnmount(() => {
   gap: 0 5px;
   padding: 7px 8px;
   border-radius: 8px;
-  border: 1px solid rgba(148, 178, 209, 0.06);
-  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(41, 37, 36, 0.06);
+  background: rgba(41, 37, 36, 0.015);
   color: var(--text-3);
 }
 
@@ -1467,16 +1411,16 @@ onBeforeUnmount(() => {
   z-index: 360;
   display: flex;
   justify-content: flex-end;
-  background: rgba(3, 7, 11, 0.55);
+  background: rgba(33, 29, 25, 0.3);
   backdrop-filter: blur(6px);
 }
 
 .history-panel {
   width: min(400px, 100vw);
   height: 100%;
-  background: #0b131d;
+  background: #f7f2ea;
   border-left: 1px solid var(--line-strong);
-  box-shadow: -30px 0 80px rgba(0, 0, 0, 0.4);
+  box-shadow: -30px 0 80px rgba(60, 45, 30, 0.12);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -1516,12 +1460,12 @@ onBeforeUnmount(() => {
 }
 
 .history-row:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
 }
 
 .history-row.active {
   background: var(--mint-soft);
-  border-color: rgba(94, 234, 212, 0.15);
+  border-color: rgba(180, 74, 38, 0.15);
 }
 
 .history-icon {
@@ -1532,12 +1476,12 @@ onBeforeUnmount(() => {
   display: grid;
   place-items: center;
   color: var(--text-3);
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(41, 37, 36, 0.035);
 }
 
 .history-row.active .history-icon {
   color: var(--mint);
-  background: rgba(94, 234, 212, 0.08);
+  background: rgba(180, 74, 38, 0.08);
 }
 
 .history-copy {

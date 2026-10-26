@@ -60,8 +60,8 @@ onBeforeUnmount(() => {
   padding: 7px 34px;
   font-size: 11.5px;
   color: var(--warning);
-  background: rgba(244, 195, 95, 0.06);
-  border-bottom: 1px solid rgba(244, 195, 95, 0.12);
+  background: rgba(169, 105, 28, 0.06);
+  border-bottom: 1px solid rgba(169, 105, 28, 0.12);
 }
 
 .conn-dot {

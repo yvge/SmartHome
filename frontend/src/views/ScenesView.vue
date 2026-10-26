@@ -142,11 +142,11 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   <div class="page scenes-page">
     <section class="page-head">
       <div>
-        <div class="eyebrow">LangGraph Orchestration</div>
+        <div class="eyebrow">日常自动化</div>
         <h1>场景编排</h1>
         <p class="lede">
-          把语音解析、条件判断与设备联动拆成状态节点，支持动态路径、关键动作与异常兜底。
-          运行时会实时展示每个节点的执行结果。
+          把一句话拆成几步：先看条件，再依次调用设备；某个环节出问题时，自动走备用方案。
+          运行时会逐步展示每个节点的结果。
         </p>
       </div>
       <div class="page-actions">
@@ -164,10 +164,10 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
     <section class="flow-strip panel">
       <div class="flow-head">
         <div>
-          <div class="panel-kicker">Scene Subgraph</div>
+          <div class="panel-kicker">执行路径</div>
           <div class="flow-title">多步场景执行图</div>
         </div>
-        <span class="chip mint"><span class="chip-dot"></span>LangGraph StateGraph</span>
+        <span class="chip mint"><span class="chip-dot"></span>LangGraph 流程</span>
       </div>
       <div class="flow-track">
         <div v-for="(node, index) in flowNodes" :key="node.key" class="flow-node-wrap">
@@ -179,7 +179,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
         </div>
         <div class="flow-loop">
           <span class="loop-line"></span>
-          <span class="loop-label">execute ⇄ 逐动作循环</span>
+          <span class="loop-label">按动作逐步执行</span>
         </div>
       </div>
       <div class="flow-stats">
@@ -436,8 +436,8 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   height: 30px;
   padding: 0 10px;
   border-radius: 8px;
-  border: 1px solid rgba(94, 234, 212, 0.13);
-  background: rgba(94, 234, 212, 0.045);
+  border: 1px solid rgba(180, 74, 38, 0.13);
+  background: rgba(180, 74, 38, 0.045);
   color: var(--text-2);
   font-size: 10px;
   white-space: nowrap;
@@ -448,8 +448,8 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
 }
 
 .flow-node.fallback {
-  border-color: rgba(244, 195, 95, 0.14);
-  background: rgba(244, 195, 95, 0.04);
+  border-color: rgba(169, 105, 28, 0.14);
+  background: rgba(169, 105, 28, 0.04);
 }
 
 .flow-node.fallback svg {
@@ -530,7 +530,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
 .section-count {
   font-size: 8.5px;
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
   border-radius: 4px;
   min-width: 16px;
   height: 16px;
@@ -563,14 +563,14 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
 }
 
 .scene-card.running {
-  border-color: rgba(94, 234, 212, 0.25);
-  box-shadow: 0 0 30px rgba(94, 234, 212, 0.06);
+  border-color: rgba(180, 74, 38, 0.2);
+  box-shadow: 0 0 30px rgba(180, 74, 38, 0.06);
 }
 
 .scene-card.custom {
   background:
-    radial-gradient(circle at 100% 0%, rgba(139, 149, 248, 0.05), transparent 50%),
-    linear-gradient(180deg, rgba(20, 32, 46, 0.66), rgba(10, 17, 26, 0.72));
+    radial-gradient(circle at 100% 0%, rgba(95, 107, 82, 0.05), transparent 50%),
+    linear-gradient(180deg, rgba(255, 253, 249, 0.72), rgba(248, 243, 235, 0.8));
 }
 
 .scene-card-head {
@@ -588,13 +588,13 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   place-items: center;
   color: var(--mint);
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.14);
+  border: 1px solid rgba(180, 74, 38, 0.14);
 }
 
 .scene-glyph.custom {
   color: var(--indigo);
   background: var(--indigo-soft);
-  border-color: rgba(139, 149, 248, 0.14);
+  border-color: rgba(95, 107, 82, 0.14);
 }
 
 .scene-title-copy {
@@ -680,7 +680,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   padding: 9px;
   border-radius: 9px;
   border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.35);
+  background: rgba(41, 37, 36, 0.05);
   max-height: 150px;
   overflow-y: auto;
 }
@@ -700,7 +700,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   font-family: var(--font-mono);
   font-size: 7.5px;
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
   margin-top: 1px;
 }
 
@@ -727,7 +727,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
 .step-critical {
   font-size: 7px;
   color: var(--amber);
-  border: 1px solid rgba(248, 198, 106, 0.15);
+  border: 1px solid rgba(192, 138, 62, 0.15);
   padding: 0 3px;
   border-radius: 3px;
   white-space: nowrap;
@@ -752,10 +752,23 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   min-width: 96px;
 }
 
+.run-btn.btn-primary {
+  background: transparent;
+  color: var(--mint);
+  border-color: var(--mint-line);
+  font-weight: 500;
+}
+
+.run-btn.btn-primary:hover {
+  background: var(--mint);
+  color: #fff9f4;
+  border-color: var(--mint);
+}
+
 .icon-btn.danger:hover {
   color: var(--critical);
   background: var(--critical-soft);
-  border-color: rgba(239, 123, 123, 0.2);
+  border-color: rgba(168, 58, 50, 0.2);
 }
 
 .scene-skeleton {
@@ -768,15 +781,15 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   justify-content: center;
   text-align: center;
   min-height: 210px;
-  border: 1px dashed rgba(148, 178, 209, 0.16);
-  background: rgba(255, 255, 255, 0.012);
+  border: 1px dashed rgba(41, 37, 36, 0.16);
+  background: rgba(41, 37, 36, 0.012);
   color: var(--text-3);
   gap: 6px;
 }
 
 .add-card:hover {
-  border-color: rgba(94, 234, 212, 0.3);
-  background: rgba(94, 234, 212, 0.025);
+  border-color: rgba(180, 74, 38, 0.2);
+  background: rgba(180, 74, 38, 0.025);
   transform: translateY(-2px);
 }
 
@@ -787,7 +800,7 @@ const withFallback = computed(() => sceneStore.scenes.filter((scene) => scene.fa
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
   margin-bottom: 2px;
 }
 

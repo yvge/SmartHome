@@ -14,12 +14,12 @@ const lastSavedAt = ref<number>(0)
 
 const glow = computed(() => {
   if (!device.value) return 'transparent'
-  if (!device.value.online) return 'rgba(148,178,209,.08)'
+  if (!device.value.online) return 'rgba(41, 37, 36, 0.08)'
   const p = device.value.properties
-  if (device.value.type === 'light' && p.power) return `${p.color_hex || '#f8c66a'}66`
-  if (device.value.type === 'sensor') return 'rgba(94,234,212,.28)'
-  if (p.power || p.playing) return 'rgba(94,234,212,.32)'
-  return 'rgba(148,178,209,.12)'
+  if (device.value.type === 'light' && p.power) return `${p.color_hex || '#c08a3e'}66`
+  if (device.value.type === 'sensor') return 'rgba(180, 74, 38, 0.2)'
+  if (p.power || p.playing) return 'rgba(180, 74, 38, 0.2)'
+  return 'rgba(41, 37, 36, 0.12)'
 })
 
 const iconColor = computed(() => {
@@ -159,7 +159,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   position: fixed;
   inset: 0;
   z-index: 350;
-  background: rgba(3, 7, 11, 0.56);
+  background: rgba(33, 29, 25, 0.3);
   backdrop-filter: blur(6px);
   display: flex;
   justify-content: flex-end;
@@ -171,10 +171,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(circle at 90% 0%, rgba(94, 234, 212, 0.06), transparent 45%),
-    #0b131d;
+    radial-gradient(circle at 90% 0%, rgba(180, 74, 38, 0.06), transparent 45%),
+    #f7f2ea;
   border-left: 1px solid var(--line-strong);
-  box-shadow: -30px 0 80px rgba(0, 0, 0, 0.4);
+  box-shadow: -30px 0 80px rgba(60, 45, 30, 0.12);
 }
 
 .drawer-head {
@@ -200,7 +200,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
   transition: color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -307,7 +307,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(41, 37, 36, 0.02);
   min-width: 0;
 }
 
@@ -332,8 +332,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   gap: 8px;
   padding: 11px 13px;
   border-radius: 11px;
-  border: 1px solid rgba(244, 195, 95, 0.18);
-  background: rgba(244, 195, 95, 0.045);
+  border: 1px solid rgba(169, 105, 28, 0.18);
+  background: rgba(169, 105, 28, 0.045);
   color: var(--warning);
   font-size: 11.5px;
   text-align: left;
@@ -341,14 +341,14 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .connectivity-btn:hover {
-  background: rgba(244, 195, 95, 0.08);
-  border-color: rgba(244, 195, 95, 0.3);
+  background: rgba(169, 105, 28, 0.08);
+  border-color: rgba(169, 105, 28, 0.25);
 }
 
 .connectivity-btn.offline {
   color: var(--mint);
-  border-color: rgba(94, 234, 212, 0.2);
-  background: rgba(94, 234, 212, 0.05);
+  border-color: rgba(180, 74, 38, 0.2);
+  background: rgba(180, 74, 38, 0.05);
 }
 
 .drawer-hint {

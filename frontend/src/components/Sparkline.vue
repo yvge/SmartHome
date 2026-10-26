@@ -13,7 +13,7 @@ const props = withDefaults(
     formatValue?: (value: number) => string
   }>(),
   {
-    color: '#5eead4',
+    color: '#b44a26',
     label: '实时功率',
     unit: '',
     height: 78,
@@ -160,7 +160,7 @@ const tooltipStyle = computed(() => {
           :x2="width - pad.right"
           :y1="y"
           :y2="y"
-          stroke="rgba(148,178,209,.07)"
+          stroke="rgba(41, 37, 36, 0.07)"
           stroke-width="1"
         />
         <path v-if="areaPath" :d="areaPath" :fill="`url(#${gradientId})`" />
@@ -179,7 +179,7 @@ const tooltipStyle = computed(() => {
           :x2="hovered.x"
           :y1="pad.top"
           :y2="height - pad.bottom"
-          stroke="rgba(148,178,209,.28)"
+          stroke="rgba(41, 37, 36, 0.28)"
           stroke-width="1"
         />
         <circle
@@ -277,9 +277,9 @@ const tooltipStyle = computed(() => {
   gap: 2px;
   padding: 6px 8px;
   border-radius: 7px;
-  background: rgba(8, 15, 22, 0.95);
+  background: rgba(255, 253, 249, 0.98);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 22px rgba(60, 45, 30, 0.12);
   pointer-events: none;
   white-space: nowrap;
 }

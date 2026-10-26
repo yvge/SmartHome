@@ -179,11 +179,11 @@ onMounted(async () => {
   <div class="page knowledge-page">
     <section class="page-head">
       <div>
-        <div class="eyebrow">Retrieval-Augmented Generation</div>
+        <div class="eyebrow">知识与检索</div>
         <h1>意图知识库</h1>
         <p class="lede">
-          用户的每一句话都会先做 Embedding 检索意图示例与家庭知识，再交给 LLM 或规则引擎解析。
-          这里是整个 Agent 的“语料层”，可在线检索与扩充。
+          你平时怎么说话，这里就怎么记。检索会找出相似的说法和家庭知识，供小居理解和回答，
+          也可以随时补充新的内容。
         </p>
       </div>
       <div class="page-actions">
@@ -210,7 +210,7 @@ onMounted(async () => {
       <div class="rag-stat panel">
         <div class="rag-stat-icon indigo"><BrainCircuit :size="16" /></div>
         <div class="rag-stat-copy">
-          <span>Embedding</span>
+          <span>向量模型</span>
           <strong class="small-value">{{ embeddingLabel }}</strong>
         </div>
         <span v-if="ragStatus?.embedding?.fallback" class="rag-stat-note warn">已降级</span>
@@ -240,9 +240,9 @@ onMounted(async () => {
       <section class="panel search-panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker">Retrieval Playground</div>
+            <div class="panel-kicker">检索</div>
             <div class="panel-title">语义检索</div>
-            <div class="panel-desc">试试不同说法，观察向量检索召回了哪些意图示例</div>
+            <div class="panel-desc">试试不同说法，看看会召回哪些相似意图</div>
           </div>
           <span class="chip" :class="searchKind === 'knowledge' ? 'amber' : searchKind === 'intent' ? 'indigo' : 'neutral'">
             {{ searchKind === 'all' ? '全部语料' : searchKind === 'knowledge' ? '仅知识' : '仅意图' }}
@@ -323,8 +323,8 @@ onMounted(async () => {
       <section class="panel pipeline-panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker">Pipeline</div>
-            <div class="panel-title">RAG 管线</div>
+            <div class="panel-kicker">RAG</div>
+            <div class="panel-title">检索管线</div>
           </div>
         </div>
         <ol class="pipeline">
@@ -368,7 +368,7 @@ onMounted(async () => {
     <section class="panel entries-panel">
       <div class="panel-head">
         <div>
-          <div class="panel-kicker">Corpus</div>
+          <div class="panel-kicker">语料</div>
           <div class="panel-title">知识条目</div>
           <div class="panel-desc">展示 {{ filteredEntries.length }} / {{ entries.length }} 条语料</div>
         </div>
@@ -421,7 +421,7 @@ onMounted(async () => {
           <div class="add-panel" role="dialog" aria-modal="true" aria-label="添加知识">
             <header class="add-head">
               <div>
-                <div class="panel-kicker">Extend Corpus</div>
+                <div class="panel-kicker">补充语料</div>
                 <h3>添加知识 / 意图示例</h3>
               </div>
               <button class="icon-btn sm" aria-label="关闭" @click="addOpen = false"><X :size="14" /></button>
@@ -495,21 +495,33 @@ onMounted(async () => {
 .rag-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  overflow: hidden;
 }
 
-.rag-stat {
+.rag-stat.panel {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 13px 14px;
+  gap: 11px;
+  padding: 16px 18px;
   min-width: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.rag-stat.panel + .rag-stat.panel {
+  border-left: 1px solid var(--line);
 }
 
 .rag-stat-icon {
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
   border-radius: 9px;
   display: grid;
   place-items: center;
@@ -531,8 +543,8 @@ onMounted(async () => {
 }
 
 .rag-stat-icon.blue {
-  color: #7dd3fc;
-  background: rgba(125, 211, 252, 0.09);
+  color: #4e7a8a;
+  background: rgba(78, 122, 138, 0.09);
 }
 
 .rag-stat-copy {
@@ -542,15 +554,15 @@ onMounted(async () => {
 }
 
 .rag-stat-copy span {
-  font-size: 8.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-4);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
 }
 
 .rag-stat-copy strong {
-  font-size: 17px;
-  font-weight: 550;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 500;
   color: var(--text);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -559,20 +571,23 @@ onMounted(async () => {
 }
 
 .rag-stat-copy strong.small-value {
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
   line-height: 1.6;
 }
 
 .rag-stat-copy strong em {
+  font-family: var(--font-sans);
   font-style: normal;
-  font-size: 9px;
+  font-size: 9.5px;
   color: var(--text-4);
   margin-left: 2px;
 }
 
 .rag-stat-note {
   margin-left: auto;
-  font-size: 8px;
+  font-size: 9.5px;
   color: var(--text-4);
   white-space: nowrap;
   align-self: flex-start;
@@ -614,13 +629,13 @@ onMounted(async () => {
   height: 40px;
   border-radius: 11px;
   border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.5);
+  background: rgba(41, 37, 36, 0.04);
   color: var(--text-4);
   transition: border-color 0.18s ease;
 }
 
 .search-input-wrap:focus-within {
-  border-color: rgba(94, 234, 212, 0.32);
+  border-color: rgba(180, 74, 38, 0.2);
 }
 
 .search-input {
@@ -645,7 +660,7 @@ onMounted(async () => {
   border-radius: 8px;
   border: none;
   background: var(--mint);
-  color: #05201b;
+  color: #fffaf5;
   font-size: 10px;
   font-weight: 600;
 }
@@ -680,7 +695,7 @@ onMounted(async () => {
 
 .example-chip:hover {
   color: var(--mint);
-  border-color: rgba(94, 234, 212, 0.2);
+  border-color: rgba(180, 74, 38, 0.2);
   background: var(--mint-soft);
 }
 
@@ -705,13 +720,13 @@ onMounted(async () => {
   gap: 10px;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid rgba(148, 178, 209, 0.075);
-  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(41, 37, 36, 0.075);
+  background: rgba(41, 37, 36, 0.018);
 }
 
 .result-card.knowledge {
-  border-color: rgba(248, 198, 106, 0.1);
-  background: rgba(248, 198, 106, 0.018);
+  border-color: rgba(192, 138, 62, 0.1);
+  background: rgba(192, 138, 62, 0.018);
 }
 
 .result-rank {
@@ -765,7 +780,7 @@ onMounted(async () => {
 .result-bar {
   height: 2px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(41, 37, 36, 0.05);
   margin: 5px 0;
   overflow: hidden;
 }
@@ -829,7 +844,7 @@ onMounted(async () => {
   top: 24px;
   bottom: -14px;
   width: 1px;
-  background: linear-gradient(180deg, rgba(94, 234, 212, 0.18), rgba(148, 178, 209, 0.06));
+  background: linear-gradient(180deg, rgba(180, 74, 38, 0.18), rgba(41, 37, 36, 0.06));
 }
 
 .pipeline-index {
@@ -843,7 +858,7 @@ onMounted(async () => {
   font-size: 9px;
   color: var(--mint);
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.13);
+  border: 1px solid rgba(180, 74, 38, 0.13);
 }
 
 .pipeline-title {
@@ -898,7 +913,7 @@ onMounted(async () => {
   padding: 0 9px;
   border-radius: 8px;
   border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.4);
+  background: rgba(41, 37, 36, 0.05);
   color: var(--text-4);
 }
 
@@ -932,13 +947,13 @@ onMounted(async () => {
   gap: 10px;
   align-items: center;
   padding: 7px 6px;
-  border-bottom: 1px solid rgba(148, 178, 209, 0.05);
+  border-bottom: 1px solid rgba(41, 37, 36, 0.05);
   font-size: 10px;
   min-width: 0;
 }
 
 .entry-row:hover:not(.entry-header) {
-  background: rgba(255, 255, 255, 0.018);
+  background: rgba(41, 37, 36, 0.018);
 }
 
 .entry-header {
@@ -996,7 +1011,7 @@ onMounted(async () => {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(3, 7, 11, 0.62);
+  background: rgba(33, 29, 25, 0.34);
   backdrop-filter: blur(8px);
 }
 
@@ -1007,7 +1022,7 @@ onMounted(async () => {
   flex-direction: column;
   border-radius: 18px;
   border: 1px solid var(--line-strong);
-  background: #0b131d;
+  background: #f7f2ea;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
 }
@@ -1049,7 +1064,7 @@ onMounted(async () => {
   padding: 8px 10px;
   border-radius: 8px;
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.12);
+  border: 1px solid rgba(180, 74, 38, 0.12);
 }
 
 .add-note svg {

@@ -183,7 +183,7 @@ function hintFor(capability: Capability): string {
   padding: 12px;
   border-radius: 13px;
   border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.4);
+  background: rgba(41, 37, 36, 0.05);
 }
 
 .telemetry-item {
@@ -276,13 +276,13 @@ function hintFor(capability: Capability): string {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(41, 37, 36, 0.02);
 }
 
 .offline-note {
   color: var(--warning);
-  border-color: rgba(244, 195, 95, 0.18);
-  background: rgba(244, 195, 95, 0.05);
+  border-color: rgba(169, 105, 28, 0.18);
+  background: rgba(169, 105, 28, 0.05);
 }
 
 .segmented {

@@ -268,14 +268,14 @@ function compactArgs(args: Record<string, any>): string {
 
 <style scoped>
 .agent-trace {
-  border: 1px solid rgba(148, 178, 209, 0.1);
+  border: 1px solid rgba(41, 37, 36, 0.1);
   border-radius: 12px;
-  background: rgba(5, 11, 18, 0.34);
+  background: rgba(41, 37, 36, 0.05);
   overflow: hidden;
 }
 
 .agent-trace.live {
-  border-color: rgba(94, 234, 212, 0.14);
+  border-color: rgba(180, 74, 38, 0.14);
 }
 
 .trace-head {
@@ -291,7 +291,7 @@ function compactArgs(args: Record<string, any>): string {
 }
 
 .trace-head:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(41, 37, 36, 0.02);
 }
 
 .trace-spark {
@@ -316,7 +316,7 @@ function compactArgs(args: Record<string, any>): string {
   font-size: 9px;
   padding: 2px 6px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
   color: var(--text-3);
   white-space: nowrap;
 }
@@ -374,8 +374,8 @@ function compactArgs(args: Record<string, any>): string {
   color: var(--warning);
   padding: 6px 8px;
   border-radius: 6px;
-  background: rgba(244, 195, 95, 0.05);
-  border: 1px solid rgba(244, 195, 95, 0.12);
+  background: rgba(169, 105, 28, 0.05);
+  border: 1px solid rgba(169, 105, 28, 0.12);
 }
 
 .trace-grid {
@@ -385,10 +385,10 @@ function compactArgs(args: Record<string, any>): string {
 }
 
 .trace-section {
-  border: 1px solid rgba(148, 178, 209, 0.075);
+  border: 1px solid rgba(41, 37, 36, 0.075);
   border-radius: 9px;
   padding: 8px 9px;
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(41, 37, 36, 0.015);
   min-width: 0;
 }
 
@@ -461,7 +461,7 @@ function compactArgs(args: Record<string, any>): string {
 .hit-bar {
   height: 2px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.055);
+  background: rgba(41, 37, 36, 0.055);
   overflow: hidden;
   margin-top: 2px;
 }
@@ -499,7 +499,7 @@ function compactArgs(args: Record<string, any>): string {
 .intent-name {
   font-size: 8.5px;
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
   padding: 2px 5px;
   border-radius: 4px;
 }
@@ -535,8 +535,8 @@ function compactArgs(args: Record<string, any>): string {
   color: var(--text-2);
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(94, 234, 212, 0.05);
-  border: 1px solid rgba(94, 234, 212, 0.08);
+  background: rgba(180, 74, 38, 0.05);
+  border: 1px solid rgba(180, 74, 38, 0.08);
 }
 
 .intent-clarify {
@@ -577,7 +577,7 @@ function compactArgs(args: Record<string, any>): string {
 .node-line {
   width: 1px;
   flex: 1;
-  background: rgba(148, 178, 209, 0.1);
+  background: rgba(41, 37, 36, 0.1);
   margin: 2px 0;
 }
 
@@ -624,8 +624,8 @@ function compactArgs(args: Record<string, any>): string {
 .tool {
   padding: 6px 7px;
   border-radius: 7px;
-  background: rgba(255, 255, 255, 0.018);
-  border: 1px solid rgba(148, 178, 209, 0.06);
+  background: rgba(41, 37, 36, 0.018);
+  border: 1px solid rgba(41, 37, 36, 0.06);
 }
 
 .tool-top {
@@ -695,7 +695,7 @@ function compactArgs(args: Record<string, any>): string {
   color: var(--text-3);
   padding: 4px 6px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(41, 37, 36, 0.02);
 }
 
 .scene-cond.passed {

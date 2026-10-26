@@ -193,7 +193,7 @@ function close() {
   display: grid;
   place-items: center;
   padding: 22px;
-  background: rgba(3, 7, 11, 0.62);
+  background: rgba(33, 29, 25, 0.34);
   backdrop-filter: blur(8px);
 }
 
@@ -203,7 +203,7 @@ function close() {
   display: flex;
   flex-direction: column;
   padding: 22px;
-  background: #0b131d;
+  background: #f7f2ea;
   border-color: var(--line-strong);
 }
 
@@ -229,25 +229,25 @@ function close() {
   display: grid;
   place-items: center;
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.18);
+  border: 1px solid rgba(180, 74, 38, 0.18);
   color: var(--mint);
 }
 
 .scene-icon.failed {
   color: var(--critical);
   background: var(--critical-soft);
-  border-color: rgba(239, 123, 123, 0.2);
+  border-color: rgba(168, 58, 50, 0.2);
 }
 
 .scene-icon.warning {
   color: var(--warning);
   background: var(--amber-soft);
-  border-color: rgba(244, 195, 95, 0.2);
+  border-color: rgba(169, 105, 28, 0.2);
 }
 
 .scene-icon.neutral {
   color: var(--text-2);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
   border-color: var(--line);
 }
 
@@ -307,7 +307,7 @@ function close() {
 .progress-track {
   height: 3px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(41, 37, 36, 0.07);
   margin: 11px 0 16px;
   overflow: hidden;
 }
@@ -315,7 +315,7 @@ function close() {
 .progress-fill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--mint), #42cdb8);
+  background: linear-gradient(90deg, var(--mint), #a3421f);
   transition: width 0.4s ease;
 }
 
@@ -324,7 +324,7 @@ function close() {
 }
 
 .progress-fill.failed {
-  background: linear-gradient(90deg, var(--critical), #d45c5c);
+  background: linear-gradient(90deg, var(--critical), #a83a32);
 }
 
 .condition-card {
@@ -333,22 +333,22 @@ function close() {
   gap: 9px;
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid rgba(244, 195, 95, 0.16);
-  background: rgba(244, 195, 95, 0.045);
+  border: 1px solid rgba(169, 105, 28, 0.16);
+  background: rgba(169, 105, 28, 0.045);
   color: var(--warning);
   margin-bottom: 14px;
 }
 
 .condition-card.passed {
-  border-color: rgba(94, 234, 212, 0.15);
-  background: rgba(94, 234, 212, 0.04);
+  border-color: rgba(180, 74, 38, 0.15);
+  background: rgba(180, 74, 38, 0.04);
   color: var(--mint);
 }
 
 .condition-card.optional:not(.passed) {
   color: var(--text-2);
   border-color: var(--line);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(41, 37, 36, 0.025);
 }
 
 .condition-title {
@@ -383,7 +383,7 @@ function close() {
 }
 
 .step.running {
-  background: rgba(94, 234, 212, 0.035);
+  background: rgba(180, 74, 38, 0.035);
 }
 
 .step-rail {
@@ -456,13 +456,13 @@ function close() {
   margin-top: 14px;
   padding: 11px 12px;
   border-radius: 10px;
-  border: 1px solid rgba(239, 123, 123, 0.16);
-  background: rgba(239, 123, 123, 0.045);
+  border: 1px solid rgba(168, 58, 50, 0.16);
+  background: rgba(168, 58, 50, 0.045);
 }
 
 .fallback-card.ok {
-  border-color: rgba(94, 234, 212, 0.15);
-  background: rgba(94, 234, 212, 0.04);
+  border-color: rgba(180, 74, 38, 0.15);
+  background: rgba(180, 74, 38, 0.04);
 }
 
 .fallback-title {
@@ -497,7 +497,7 @@ function close() {
   padding: 12px 13px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(41, 37, 36, 0.025);
   font-size: 11.5px;
   line-height: 1.65;
   color: var(--text-2);

@@ -87,7 +87,7 @@ function clearFilters() {
   <div class="page devices-page">
     <section class="page-head">
       <div>
-        <div class="eyebrow">Unified Device Access</div>
+        <div class="eyebrow">设备接入</div>
         <h1>全屋设备</h1>
         <p class="lede">
           {{ home.devices.length }} 台设备通过统一能力 Schema 接入，支持灯光、空调、窗帘、净化、插座等
@@ -258,25 +258,30 @@ function clearFilters() {
 .stat-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  overflow: hidden;
 }
 
 .stat-tile {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 13px 14px;
-  border-radius: 13px;
-  border: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.025), transparent 55%),
-    rgba(15, 24, 36, 0.55);
+  gap: 11px;
+  padding: 16px 18px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.stat-tile + .stat-tile {
+  border-left: 1px solid var(--line);
 }
 
 .stat-icon {
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
   border-radius: 9px;
   display: grid;
   place-items: center;
@@ -304,7 +309,7 @@ function clearFilters() {
 
 .stat-icon.muted {
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
 }
 
 .stat-tile > div:nth-child(2) {
@@ -314,31 +319,32 @@ function clearFilters() {
 }
 
 .stat-label {
-  font-size: 8.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-4);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
 }
 
 .stat-tile strong {
-  font-size: 16px;
-  font-weight: 550;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 500;
   color: var(--text);
-  line-height: 1.35;
+  line-height: 1.2;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .stat-tile strong em {
+  font-family: var(--font-sans);
   font-style: normal;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text-4);
   font-weight: 400;
 }
 
 .stat-note {
   margin-left: auto;
-  font-size: 8.5px;
+  font-size: 9.5px;
   color: var(--text-4);
   white-space: nowrap;
 }
@@ -353,6 +359,8 @@ function clearFilters() {
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line);
 }
 
 .room-tabs {
@@ -368,37 +376,49 @@ function clearFilters() {
 }
 
 .room-tab {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 10px;
-  border-radius: 8px;
+  gap: 6px;
+  padding: 9px 10px 11px;
+  border-radius: 0;
   border: 1px solid transparent;
   background: transparent;
   color: var(--text-3);
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
-  transition: all 0.16s ease;
+  transition: color 0.16s ease;
 }
 
 .room-tab:hover {
   color: var(--text-2);
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
 }
 
 .room-tab.active {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.045);
-  border-color: var(--line);
+  background: transparent;
+  border-color: transparent;
+}
+
+.room-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--mint);
 }
 
 .room-tab span {
-  font-size: 8px;
+  font-size: 9.5px;
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.05);
   border-radius: 4px;
-  min-width: 15px;
-  height: 15px;
+  min-width: 16px;
+  height: 16px;
   display: inline-grid;
   place-items: center;
   font-variant-numeric: tabular-nums;
@@ -414,11 +434,11 @@ function clearFilters() {
   display: flex;
   align-items: center;
   gap: 6px;
-  height: 32px;
-  padding: 0 10px;
-  border-radius: 9px;
-  border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.45);
+  height: 33px;
+  padding: 0 11px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
   color: var(--text-4);
 }
 
@@ -474,7 +494,7 @@ function clearFilters() {
   display: grid;
   place-items: center;
   color: var(--text-3);
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(41, 37, 36, 0.035);
   border: 1px solid var(--line);
 }
 

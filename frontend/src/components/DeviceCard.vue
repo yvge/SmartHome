@@ -46,30 +46,6 @@ const statusText = computed(() => {
   return '待机'
 })
 
-const glowColor = computed(() => {
-  if (!props.device.online) return 'rgba(148,178,209,.12)'
-  if (!isActive.value) return 'rgba(148,178,209,.14)'
-  const p = props.device.properties
-  switch (props.device.type) {
-    case 'light':
-      return `${p.color_hex || '#f8c66a'}77`
-    case 'ac':
-      return 'rgba(139,149,248,.5)'
-    case 'purifier':
-      return 'rgba(94,234,212,.42)'
-    case 'humidifier':
-      return 'rgba(125,211,252,.42)'
-    case 'socket':
-      return 'rgba(248,198,106,.35)'
-    case 'speaker':
-      return 'rgba(139,149,248,.42)'
-    case 'vacuum':
-      return 'rgba(94,234,212,.35)'
-    default:
-      return 'rgba(94,234,212,.3)'
-  }
-})
-
 const iconTint = computed(() => {
   const p = props.device.properties
   if (!props.device.online) return 'var(--text-4)'
@@ -81,7 +57,7 @@ const iconTint = computed(() => {
 
 const colorDot = computed(() => {
   if (props.device.type !== 'light' || !props.device.properties.power) return null
-  return props.device.properties.color_hex || '#f8c66a'
+  return props.device.properties.color_hex || '#c08a3e'
 })
 
 function toggle() {
@@ -101,10 +77,7 @@ function toggle() {
     @keydown.enter="emit('select', device)"
   >
     <div class="card-top">
-      <div
-        class="device-icon"
-        :style="{ color: iconTint, boxShadow: `0 0 24px ${glowColor}`, borderColor: glowColor }"
-      >
+      <div class="device-icon" :style="{ color: iconTint }">
         <DeviceIcon :icon="device.icon" :size="20" />
       </div>
       <div class="card-status">
@@ -145,14 +118,12 @@ function toggle() {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  min-height: 164px;
-  border-radius: 17px;
+  gap: 13px;
+  padding: 17px;
+  min-height: 168px;
+  border-radius: 13px;
   border: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(94, 234, 212, 0.035), transparent 50%),
-    linear-gradient(180deg, rgba(20, 32, 46, 0.56), rgba(10, 17, 26, 0.66));
+  background: var(--panel);
   cursor: pointer;
   outline: none;
   transition:
@@ -162,18 +133,31 @@ function toggle() {
     box-shadow 0.2s ease;
 }
 
+.device-card::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 0;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
 .device-card:hover,
 .device-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: rgba(148, 178, 209, 0.22);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+  transform: translateY(-2px);
+  border-color: rgba(41, 37, 36, 0.2);
+  box-shadow: 0 12px 28px rgba(60, 45, 30, 0.07);
 }
 
 .device-card.active {
-  border-color: rgba(94, 234, 212, 0.17);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(94, 234, 212, 0.08), transparent 55%),
-    linear-gradient(180deg, rgba(20, 36, 49, 0.62), rgba(10, 17, 26, 0.7));
+  border-color: rgba(180, 74, 38, 0.24);
+}
+
+.device-card.active::before {
+  background: var(--mint);
 }
 
 .device-card.offline {
@@ -190,19 +174,24 @@ function toggle() {
   width: 38px;
   height: 38px;
   flex: 0 0 38px;
-  border-radius: 12px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
-  transition: color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  background: var(--bg-soft);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.device-card.active .device-icon {
+  background: var(--mint-soft);
+  border-color: var(--mint-line);
 }
 
 .card-status {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-3);
   white-space: nowrap;
 }
@@ -216,7 +205,6 @@ function toggle() {
 
 .status-dot.on {
   background: var(--mint);
-  box-shadow: 0 0 7px rgba(94, 234, 212, 0.8);
 }
 
 .status-dot.offline {
@@ -235,9 +223,10 @@ function toggle() {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13.5px;
-  font-weight: 550;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   color: var(--text);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -249,25 +238,24 @@ function toggle() {
   height: 6px;
   border-radius: 50%;
   flex: 0 0 6px;
-  box-shadow: 0 0 8px currentColor;
 }
 
 .card-room {
-  font-size: 10.5px;
+  font-size: 11.5px;
   color: var(--text-3);
   margin-top: 2px;
 }
 
 .card-metric {
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--text-2);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   font-variant-numeric: tabular-nums;
-  padding: 7px 9px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(148, 178, 209, 0.06);
-  min-height: 31px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: var(--bg);
+  border: 1px solid transparent;
+  min-height: 32px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -284,7 +272,7 @@ function toggle() {
 }
 
 .device-id {
-  font-size: 8.5px;
+  font-size: 9.5px;
   color: var(--text-4);
   overflow: hidden;
   text-overflow: ellipsis;

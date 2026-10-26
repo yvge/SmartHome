@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Database, Sparkles, Wifi, WifiOff } from 'lucide-vue-next'
+import { Cpu, Database, MessageSquare, Wifi, WifiOff } from 'lucide-vue-next'
 import { useHomeStore } from '@/stores/home'
 import { pad } from '@/utils/format'
 
@@ -63,7 +63,7 @@ function openChat() {
 
       <div class="status-pill hide-md" :class="{ online: home.status?.llm.enabled }">
         <span class="dot"></span>
-        <Sparkles :size="12" />
+        <Cpu :size="12" />
         <span class="hide-sm">{{ llmLabel }}</span>
       </div>
 
@@ -76,10 +76,10 @@ function openChat() {
       <button
         v-if="route.path !== '/chat'"
         class="icon-btn hide-sm"
-        title="打开 AI 管家"
+        title="找小居聊聊"
         @click="openChat"
       >
-        <Sparkles :size="17" />
+        <MessageSquare :size="16" />
       </button>
 
       <div class="avatar" title="家庭管理员">居</div>
@@ -90,6 +90,5 @@ function openChat() {
 <style scoped>
 .dot-mint {
   background: var(--mint) !important;
-  box-shadow: 0 0 8px rgba(94, 234, 212, 0.6);
 }
 </style>

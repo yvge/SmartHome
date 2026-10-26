@@ -100,9 +100,9 @@ function markerStyle(device: Device) {
   const p = device.properties
   const glow =
     device.type === 'light' && p.power
-      ? `${p.color_hex || '#f8c66a'}88`
+      ? `${p.color_hex || '#c08a3e'}88`
       : isActive(device)
-        ? 'rgba(94,234,212,.32)'
+        ? 'rgba(180, 74, 38, 0.2)'
         : 'transparent'
   return {
     left: `${position.x}%`,
@@ -110,10 +110,10 @@ function markerStyle(device: Device) {
     '--marker-glow': glow,
     '--marker-color':
       device.type === 'light' && p.power
-        ? p.color_hex || '#f8c66a'
+        ? p.color_hex || '#c08a3e'
         : isActive(device)
-          ? '#5eead4'
-          : '#8ea2b8',
+          ? '#b44a26'
+          : '#9c9287',
   }
 }
 
@@ -213,48 +213,36 @@ defineExpose({ markerTitle })
   min-height: 330px;
   border-radius: 16px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.02), transparent 40%),
-    linear-gradient(145deg, rgba(16, 27, 39, 0.88), rgba(8, 14, 21, 0.94));
-  border: 1px solid rgba(148, 178, 209, 0.09);
+  background: #faf6ef;
+  border: 1px solid rgba(41, 37, 36, 0.12);
   transition: background 0.6s ease;
 }
 
 .floorplan.night {
-  background:
-    radial-gradient(circle at 25% 25%, rgba(139, 149, 248, 0.05), transparent 42%),
-    linear-gradient(145deg, rgba(11, 18, 30, 0.94), rgba(5, 9, 15, 0.98));
+  background: #f7f2e9;
 }
 
 .floor-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(148, 178, 209, 0.038) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 178, 209, 0.038) 1px, transparent 1px);
-  background-size: 26px 26px;
-  mask-image: radial-gradient(ellipse at 50% 45%, black 30%, transparent 82%);
+    linear-gradient(rgba(41, 37, 36, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 37, 36, 0.028) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 86%);
   pointer-events: none;
 }
 
 .room {
   position: absolute;
-  border-radius: 13px;
-  border: 1px solid rgba(148, 178, 209, 0.12);
-  background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  border-radius: 4px;
+  border: 1px solid rgba(41, 37, 36, 0.16);
+  background: rgba(255, 253, 249, 0.28);
   overflow: hidden;
 }
 
-.room::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(148, 178, 209, 0.025) 1px, transparent 1px);
-  background-size: 100% 14px;
-  opacity: 0.5;
-  pointer-events: none;
+.room:nth-child(even) {
+  background: rgba(41, 37, 36, 0.015);
 }
 
 .room-bedroom {
@@ -313,20 +301,20 @@ defineExpose({ markerTitle })
 }
 
 .room-name {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 550;
-  letter-spacing: 0.12em;
-  color: rgba(214, 230, 244, 0.62);
+  letter-spacing: 0.05em;
+  color: rgba(41, 37, 36, 0.68);
 }
 
 .room-climate {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text-4);
   white-space: nowrap;
 }
 
 .room-climate.empty {
-  color: rgba(100, 118, 140, 0.5);
+  color: rgba(41, 37, 36, 0.5);
   font-style: italic;
 }
 
@@ -348,8 +336,8 @@ defineExpose({ markerTitle })
 /* furniture sketches */
 .furniture {
   position: absolute;
-  border: 1px solid rgba(148, 178, 209, 0.08);
-  background: rgba(148, 178, 209, 0.035);
+  border: 1px solid rgba(41, 37, 36, 0.08);
+  background: rgba(41, 37, 36, 0.035);
   border-radius: 6px;
   pointer-events: none;
 }
@@ -375,7 +363,7 @@ defineExpose({ markerTitle })
   top: 55%;
   width: 2px;
   height: 22%;
-  background: rgba(148, 178, 209, 0.13);
+  background: rgba(41, 37, 36, 0.13);
   border: none;
 }
 
@@ -385,8 +373,8 @@ defineExpose({ markerTitle })
   width: 17%;
   height: 8%;
   border-radius: 5px;
-  background: rgba(139, 149, 248, 0.045);
-  border-color: rgba(139, 149, 248, 0.09);
+  background: rgba(95, 107, 82, 0.045);
+  border-color: rgba(95, 107, 82, 0.09);
 }
 
 .nightstand {
@@ -422,8 +410,8 @@ defineExpose({ markerTitle })
   width: 10%;
   height: 16%;
   border-radius: 50% 50% 40% 40%;
-  border-color: rgba(85, 217, 154, 0.12);
-  background: rgba(85, 217, 154, 0.04);
+  border-color: rgba(61, 122, 82, 0.12);
+  background: rgba(61, 122, 82, 0.04);
 }
 
 .plant.one {
@@ -443,41 +431,47 @@ defineExpose({ markerTitle })
   position: absolute;
   z-index: 5;
   transform: translate(-50%, -50%);
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid rgba(148, 178, 209, 0.18);
-  background: rgba(11, 19, 28, 0.9);
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+  border: 1px solid rgba(41, 37, 36, 0.2);
+  background: #fffdf9;
   color: var(--marker-color, var(--text-2));
   display: grid;
   place-items: center;
+  box-shadow: 0 1px 3px rgba(60, 45, 30, 0.08);
   transition:
     transform 0.18s ease,
     border-color 0.2s ease,
-    box-shadow 0.2s ease,
+    color 0.2s ease,
     background 0.2s ease;
   padding: 0;
 }
 
 .device-marker:hover,
 .device-marker:focus-visible {
-  transform: translate(-50%, -50%) scale(1.16);
-  border-color: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: rgba(41, 37, 36, 0.4);
   z-index: 12;
   outline: none;
 }
 
 .device-marker.active {
-  border-color: color-mix(in srgb, var(--marker-color) 45%, transparent);
-  box-shadow:
-    0 0 22px var(--marker-glow),
-    inset 0 0 14px color-mix(in srgb, var(--marker-color) 12%, transparent);
+  background: var(--mint);
+  border-color: var(--mint);
+  color: #fff9f4;
 }
 
 .device-marker.selected {
-  transform: translate(-50%, -50%) scale(1.16);
-  border-color: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: var(--ink);
   z-index: 13;
+  box-shadow: 0 0 0 3px rgba(41, 37, 36, 0.1);
+}
+
+.device-marker.active.selected {
+  border-color: #fffdf9;
+  box-shadow: 0 0 0 3px rgba(180, 74, 38, 0.22);
 }
 
 .device-marker.offline {
@@ -490,14 +484,7 @@ defineExpose({ markerTitle })
 }
 
 .marker-halo {
-  position: absolute;
-  inset: -5px;
-  border-radius: inherit;
-  background: var(--marker-glow);
-  filter: blur(9px);
-  opacity: 0.6;
-  z-index: -1;
-  pointer-events: none;
+  display: none;
 }
 
 .marker-label {
@@ -510,9 +497,9 @@ defineExpose({ markerTitle })
   gap: 1px;
   padding: 6px 8px;
   border-radius: 7px;
-  background: rgba(7, 13, 20, 0.94);
+  background: rgba(255, 253, 249, 0.98);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 20px rgba(60, 45, 30, 0.12);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -527,14 +514,14 @@ defineExpose({ markerTitle })
 }
 
 .marker-label strong {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 550;
   color: var(--text);
 }
 
 .marker-label em {
   font-style: normal;
-  font-size: 9px;
+  font-size: 9.5px;
   color: var(--text-3);
   font-variant-numeric: tabular-nums;
 }
@@ -591,7 +578,7 @@ defineExpose({ markerTitle })
 
 .lg-on {
   background: var(--mint);
-  box-shadow: 0 0 6px rgba(94, 234, 212, 0.7);
+  box-shadow: 0 0 6px rgba(180, 74, 38, 0.2);
 }
 
 .lg-off {

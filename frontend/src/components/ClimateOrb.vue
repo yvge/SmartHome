@@ -21,9 +21,9 @@ const fraction = computed(() => clamp((props.temperature - 16) / 16, 0, 1))
 const dash = computed(() => `${(arcLength * fraction.value).toFixed(2)} ${circumference.toFixed(2)}`)
 
 const palette = computed(() => {
-  if (props.temperature >= 28) return { from: '#f8c66a', to: '#f0946c', glow: 'rgba(248,198,106,.22)' }
-  if (props.temperature <= 21) return { from: '#8b95f8', to: '#5eead4', glow: 'rgba(139,149,248,.2)' }
-  return { from: '#5eead4', to: '#8b95f8', glow: 'rgba(94,234,212,.2)' }
+  if (props.temperature >= 28) return { from: '#c08a3e', to: '#b96a45', glow: 'rgba(192, 138, 62, 0.22)' }
+  if (props.temperature <= 21) return { from: '#5f6b52', to: '#b44a26', glow: 'rgba(95, 107, 82, 0.2)' }
+  return { from: '#b44a26', to: '#5f6b52', glow: 'rgba(180, 74, 38, 0.2)' }
 })
 
 const endPoint = computed(() => {
@@ -60,8 +60,8 @@ const ticks = computed(() =>
           <stop offset="100%" :stop-color="palette.to" />
         </linearGradient>
         <radialGradient id="orbInner" cx="50%" cy="42%" r="60%">
-          <stop offset="0%" stop-color="rgba(94,234,212,.08)" />
-          <stop offset="70%" stop-color="rgba(94,234,212,.015)" />
+          <stop offset="0%" stop-color="rgba(180, 74, 38, 0.04)" />
+          <stop offset="70%" stop-color="rgba(180, 74, 38, 0.01)" />
           <stop offset="100%" stop-color="transparent" />
         </radialGradient>
       </defs>
@@ -71,7 +71,7 @@ const ticks = computed(() =>
         cy="110"
         :r="radius"
         fill="none"
-        stroke="rgba(148,178,209,.1)"
+        stroke="rgba(41, 37, 36, 0.1)"
         stroke-width="7"
         :stroke-dasharray="`${arcLength} ${circumference}`"
         stroke-linecap="round"
@@ -97,7 +97,7 @@ const ticks = computed(() =>
           :y1="tick.y1"
           :x2="tick.x2"
           :y2="tick.y2"
-          :stroke="tick.major ? 'rgba(148,178,209,.32)' : 'rgba(148,178,209,.16)'"
+          :stroke="tick.major ? 'rgba(41, 37, 36, 0.32)' : 'rgba(41, 37, 36, 0.16)'"
           stroke-width="1"
           stroke-linecap="round"
         />
@@ -105,10 +105,10 @@ const ticks = computed(() =>
       <circle
         :cx="endPoint.x"
         :cy="endPoint.y"
-        r="5.5"
-        fill="#eafffb"
-        stroke="var(--surface-chart)"
-        stroke-width="3"
+        r="4.5"
+        fill="var(--mint)"
+        stroke="#fffdf9"
+        stroke-width="2.5"
         class="arc-end"
       />
     </svg>
@@ -132,13 +132,7 @@ const ticks = computed(() =>
 }
 
 .orb-halo {
-  position: absolute;
-  inset: 17%;
-  border-radius: 50%;
-  background: var(--orb-glow);
-  filter: blur(28px);
-  opacity: 0.9;
-  animation: pulse-soft 6s ease-in-out infinite;
+  display: none;
 }
 
 .orb-svg {
@@ -150,11 +144,11 @@ const ticks = computed(() =>
 }
 
 .arc-value {
-  filter: drop-shadow(0 0 7px rgba(94, 234, 212, 0.3));
+  filter: none;
 }
 
 .arc-end {
-  filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.55));
+  filter: none;
 }
 
 .ticks {
@@ -173,41 +167,37 @@ const ticks = computed(() =>
 }
 
 .orb-label {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
   color: var(--text-3);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .orb-value {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 4vw, 50px);
-  font-weight: 580;
-  letter-spacing: -0.05em;
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 4.1vw, 52px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
   line-height: 1;
-  font-variant-numeric: proportional-nums;
+  font-variant-numeric: lining-nums;
 }
 
 .orb-value span {
-  font-size: 17px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
   letter-spacing: 0;
-  color: var(--text-2);
+  color: var(--text-3);
   margin-left: 3px;
 }
 
 .orb-comfort {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  margin-top: 9px;
-  padding: 3px 8px;
-  border-radius: 99px;
-  font-size: 10px;
+  gap: 6px;
+  margin-top: 11px;
+  font-size: 10.5px;
   color: var(--mint);
-  background: rgba(94, 234, 212, 0.07);
-  border: 1px solid rgba(94, 234, 212, 0.13);
 }
 
 .orb-comfort i {
@@ -215,13 +205,12 @@ const ticks = computed(() =>
   height: 4px;
   border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 0 7px currentColor;
 }
 
 .orb-sub {
-  font-size: 10px;
+  font-size: 10.5px;
   color: var(--text-4);
-  margin-top: 7px;
+  margin-top: 8px;
   font-variant-numeric: tabular-nums;
 }
 </style>

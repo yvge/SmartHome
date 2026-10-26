@@ -54,23 +54,23 @@ const icons = {
   padding: 11px 12px;
   border-radius: 12px;
   border: 1px solid var(--line-strong);
-  background: rgba(13, 22, 33, 0.94);
+  background: rgba(255, 253, 249, 0.98);
   backdrop-filter: blur(18px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 16px 40px rgba(60, 45, 30, 0.12);
   font-size: 12px;
   color: var(--text);
 }
 
 .toast.success {
-  border-color: rgba(85, 217, 154, 0.25);
+  border-color: rgba(61, 122, 82, 0.25);
 }
 
 .toast.error {
-  border-color: rgba(239, 123, 123, 0.28);
+  border-color: rgba(168, 58, 50, 0.25);
 }
 
 .toast.warning {
-  border-color: rgba(244, 195, 95, 0.25);
+  border-color: rgba(169, 105, 28, 0.25);
 }
 
 .toast-icon {

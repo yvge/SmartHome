@@ -6,8 +6,8 @@ import {
   Plus,
   Save,
   ShieldAlert,
-  Sparkles,
   Trash2,
+  Workflow,
   X,
 } from 'lucide-vue-next'
 import DeviceIcon from '@/components/DeviceIcon.vue'
@@ -307,11 +307,11 @@ function stepSummary(step: EditableStep): string {
         <div class="editor-panel" role="dialog" aria-modal="true" aria-label="场景编排器">
           <header class="editor-head">
             <div class="editor-title-wrap">
-              <div class="editor-icon"><Sparkles :size="18" /></div>
+              <div class="editor-icon"><Workflow :size="18" /></div>
               <div>
-                <div class="panel-kicker">Scene Composer</div>
+                <div class="panel-kicker">场景编辑</div>
                 <h3 class="editor-title">{{ scene ? '编辑场景' : '新建场景' }}</h3>
-                <p class="editor-sub">把设备动作编排成可执行的多步 LangGraph 场景</p>
+                <p class="editor-sub">把几个设备动作排好顺序，保存成可以一键执行的场景</p>
               </div>
             </div>
             <button class="icon-btn sm" aria-label="关闭" @click="close">
@@ -621,7 +621,7 @@ function stepSummary(step: EditableStep): string {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(3, 7, 11, 0.62);
+  background: rgba(33, 29, 25, 0.34);
   backdrop-filter: blur(8px);
 }
 
@@ -632,7 +632,7 @@ function stepSummary(step: EditableStep): string {
   flex-direction: column;
   border-radius: 20px;
   border: 1px solid var(--line-strong);
-  background: #0b131d;
+  background: #f7f2ea;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
 }
@@ -661,7 +661,7 @@ function stepSummary(step: EditableStep): string {
   place-items: center;
   color: var(--mint);
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.16);
+  border: 1px solid rgba(180, 74, 38, 0.16);
 }
 
 .editor-title {
@@ -733,7 +733,7 @@ function stepSummary(step: EditableStep): string {
   padding: 12px;
   border-radius: 11px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.018);
+  background: rgba(41, 37, 36, 0.018);
 }
 
 .condition-off {
@@ -815,7 +815,7 @@ function stepSummary(step: EditableStep): string {
   padding: 11px;
   border-radius: 12px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(41, 37, 36, 0.02);
 }
 
 .step-order {
@@ -834,7 +834,7 @@ function stepSummary(step: EditableStep): string {
   border-radius: 6px;
   display: grid;
   place-items: center;
-  background: rgba(94, 234, 212, 0.06);
+  background: rgba(180, 74, 38, 0.06);
   color: var(--mint);
   font-family: var(--font-mono);
   font-size: 8px;
@@ -973,15 +973,15 @@ function stepSummary(step: EditableStep): string {
   color: var(--text-4);
   padding: 5px 7px;
   border-radius: 6px;
-  background: rgba(94, 234, 212, 0.03);
-  border: 1px solid rgba(94, 234, 212, 0.06);
+  background: rgba(180, 74, 38, 0.03);
+  border: 1px solid rgba(180, 74, 38, 0.06);
   line-height: 1.5;
 }
 
 .icon-btn.danger:hover {
   color: var(--critical);
   background: var(--critical-soft);
-  border-color: rgba(239, 123, 123, 0.2);
+  border-color: rgba(168, 58, 50, 0.2);
 }
 
 .collapse-head {
@@ -1010,8 +1010,8 @@ function stepSummary(step: EditableStep): string {
 }
 
 .fallback-step {
-  border-color: rgba(244, 195, 95, 0.11);
-  background: rgba(244, 195, 95, 0.02);
+  border-color: rgba(169, 105, 28, 0.11);
+  background: rgba(169, 105, 28, 0.02);
 }
 
 .fallback-order {
@@ -1019,7 +1019,7 @@ function stepSummary(step: EditableStep): string {
 }
 
 .fallback-order > span {
-  background: rgba(244, 195, 95, 0.08);
+  background: rgba(169, 105, 28, 0.08);
   color: var(--warning);
 }
 
@@ -1034,7 +1034,7 @@ function stepSummary(step: EditableStep): string {
   gap: 14px;
   padding: 13px 20px;
   border-top: 1px solid var(--line);
-  background: rgba(7, 13, 20, 0.5);
+  background: rgba(244, 240, 233, 0.9);
   flex-wrap: wrap;
 }
 

@@ -247,10 +247,10 @@ onBeforeUnmount(() => {
   <div class="page executions-page">
     <section class="page-head">
       <div>
-        <div class="eyebrow">Agent Observability</div>
+        <div class="eyebrow">执行记录</div>
         <h1>运行轨迹</h1>
         <p class="lede">
-          每一次对话与场景执行都会被完整记录：意图解析、RAG 召回、工具调用、LangGraph 节点耗时与最终状态。
+          每次对话与场景执行都会被完整记录：从意图解析到设备动作，花了多久、结果如何，都能回看。
         </p>
       </div>
       <div class="page-actions">
@@ -510,27 +510,36 @@ onBeforeUnmount(() => {
 .exec-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  overflow: hidden;
 }
 
 .exec-stat {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 11px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(15, 24, 36, 0.5);
+  padding: 15px 18px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.exec-stat + .exec-stat {
+  border-left: 1px solid var(--line);
 }
 
 .exec-stat-label {
-  font-size: 9px;
-  color: var(--text-4);
+  font-size: 10px;
+  color: var(--text-3);
 }
 
 .exec-stat strong {
-  font-size: 17px;
-  font-weight: 550;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 500;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
@@ -588,7 +597,7 @@ onBeforeUnmount(() => {
   padding: 0 9px;
   border-radius: 8px;
   border: 1px solid var(--line);
-  background: rgba(5, 11, 18, 0.4);
+  background: rgba(41, 37, 36, 0.05);
   color: var(--text-4);
 }
 
@@ -625,12 +634,12 @@ onBeforeUnmount(() => {
 }
 
 .exec-row:hover {
-  background: rgba(255, 255, 255, 0.028);
+  background: rgba(41, 37, 36, 0.028);
 }
 
 .exec-row.active {
-  background: rgba(94, 234, 212, 0.045);
-  border-color: rgba(94, 234, 212, 0.13);
+  background: rgba(180, 74, 38, 0.045);
+  border-color: rgba(180, 74, 38, 0.13);
 }
 
 .exec-status-dot {
@@ -643,7 +652,7 @@ onBeforeUnmount(() => {
 
 .exec-status-dot.good {
   background: var(--good);
-  box-shadow: 0 0 7px rgba(85, 217, 154, 0.6);
+  box-shadow: 0 0 7px rgba(61, 122, 82, 0.25);
 }
 
 .exec-status-dot.warn {
@@ -700,7 +709,7 @@ onBeforeUnmount(() => {
   font-size: 7.5px;
   padding: 0 4px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
 }
 
 .exec-kind.scene {
@@ -775,19 +784,19 @@ onBeforeUnmount(() => {
   place-items: center;
   color: var(--mint);
   background: var(--mint-soft);
-  border: 1px solid rgba(94, 234, 212, 0.14);
+  border: 1px solid rgba(180, 74, 38, 0.14);
 }
 
 .detail-glyph.bad {
   color: var(--critical);
   background: var(--critical-soft);
-  border-color: rgba(239, 123, 123, 0.18);
+  border-color: rgba(168, 58, 50, 0.18);
 }
 
 .detail-glyph.warn {
   color: var(--warning);
   background: var(--amber-soft);
-  border-color: rgba(244, 195, 95, 0.18);
+  border-color: rgba(169, 105, 28, 0.18);
 }
 
 .detail-title-copy {
@@ -845,8 +854,8 @@ onBeforeUnmount(() => {
 .detail-input-block {
   padding: 10px 12px;
   border-radius: 9px;
-  background: rgba(94, 234, 212, 0.035);
-  border: 1px solid rgba(94, 234, 212, 0.09);
+  background: rgba(180, 74, 38, 0.035);
+  border: 1px solid rgba(180, 74, 38, 0.09);
 }
 
 .detail-label {
@@ -902,8 +911,8 @@ onBeforeUnmount(() => {
 .intent-cell {
   padding: 8px 9px;
   border-radius: 8px;
-  border: 1px solid rgba(148, 178, 209, 0.07);
-  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(41, 37, 36, 0.07);
+  background: rgba(41, 37, 36, 0.018);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -946,7 +955,7 @@ onBeforeUnmount(() => {
   font-size: 7.5px;
   font-family: var(--font-mono);
   color: var(--text-4);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(41, 37, 36, 0.04);
 }
 
 .action-label {
@@ -984,7 +993,7 @@ onBeforeUnmount(() => {
   top: 10px;
   bottom: 0;
   width: 1px;
-  background: rgba(148, 178, 209, 0.09);
+  background: rgba(41, 37, 36, 0.09);
 }
 
 .detail-node-dot {
@@ -992,7 +1001,7 @@ onBeforeUnmount(() => {
   height: 7px;
   border-radius: 50%;
   border: 1.5px solid var(--mint);
-  background: #0b131d;
+  background: #f7f2ea;
   flex: 0 0 7px;
   margin-top: 3px;
   z-index: 1;
@@ -1039,8 +1048,8 @@ onBeforeUnmount(() => {
   gap: 7px;
   padding: 7px 8px;
   border-radius: 8px;
-  border: 1px solid rgba(148, 178, 209, 0.06);
-  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(41, 37, 36, 0.06);
+  background: rgba(41, 37, 36, 0.015);
   color: var(--text-4);
 }
 
@@ -1050,8 +1059,8 @@ onBeforeUnmount(() => {
 
 .detail-tool.error {
   color: var(--critical);
-  border-color: rgba(239, 123, 123, 0.1);
-  background: rgba(239, 123, 123, 0.025);
+  border-color: rgba(168, 58, 50, 0.1);
+  background: rgba(168, 58, 50, 0.025);
 }
 
 .detail-tool-copy {
@@ -1133,7 +1142,7 @@ onBeforeUnmount(() => {
   color: var(--text-2);
   padding: 10px 12px;
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.022);
+  background: rgba(41, 37, 36, 0.022);
   border: 1px solid var(--line);
   white-space: pre-wrap;
 }
@@ -1144,8 +1153,8 @@ onBeforeUnmount(() => {
   gap: 6px;
   padding: 9px 11px;
   border-radius: 8px;
-  border: 1px solid rgba(239, 123, 123, 0.16);
-  background: rgba(239, 123, 123, 0.04);
+  border: 1px solid rgba(168, 58, 50, 0.16);
+  background: rgba(168, 58, 50, 0.04);
   color: var(--critical);
   font-size: 9.5px;
   line-height: 1.55;

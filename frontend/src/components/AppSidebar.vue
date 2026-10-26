@@ -6,7 +6,7 @@ import {
   Cpu,
   Database,
   LayoutDashboard,
-  Sparkles,
+  MessageCircle,
   Workflow,
   Zap,
 } from 'lucide-vue-next'
@@ -19,7 +19,7 @@ const chat = useChatStore()
 
 const navItems = [
   { path: '/', label: '总览', icon: LayoutDashboard },
-  { path: '/chat', label: 'AI 管家', icon: Sparkles },
+  { path: '/chat', label: '小居', icon: MessageCircle },
   { path: '/devices', label: '设备', icon: Cpu },
   { path: '/scenes', label: '场景编排', icon: Workflow },
   { path: '/knowledge', label: '知识库', icon: Database },
@@ -65,7 +65,7 @@ const version = computed(() => home.status?.app.version || '1.0.0')
       </div>
       <div class="brand-text">
         <div class="brand-name">智慧居</div>
-        <div class="brand-sub">Agent Platform</div>
+        <div class="brand-sub">Smart Living</div>
       </div>
     </RouterLink>
 
@@ -88,8 +88,8 @@ const version = computed(() => home.status?.app.version || '1.0.0')
 
     <div class="runtime-card">
       <div class="runtime-head">
-        <div class="runtime-title">AI Runtime</div>
-        <span class="runtime-live"><i></i>{{ home.connected ? 'LIVE' : 'SYNC' }}</span>
+        <div class="runtime-title">Runtime</div>
+        <span class="runtime-live"><i></i>{{ home.connected ? '在线' : '同步' }}</span>
       </div>
       <div class="runtime-row">
         <span>推理模式</span>
@@ -109,7 +109,7 @@ const version = computed(() => home.status?.app.version || '1.0.0')
       </div>
       <div class="runtime-foot">
         <span>v{{ version }}</span>
-        <span>2024.12</span>
+        <span>本地部署</span>
       </div>
     </div>
   </aside>
@@ -131,7 +131,7 @@ const version = computed(() => home.status?.app.version || '1.0.0')
   height: 5px;
   border-radius: 50%;
   background: var(--mint);
-  box-shadow: 0 0 8px rgba(94, 234, 212, 0.8);
+  box-shadow: 0 0 8px rgba(180, 74, 38, 0.2);
   animation: pulse-soft 2.2s ease infinite;
 }
 

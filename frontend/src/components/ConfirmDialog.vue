@@ -54,7 +54,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(3, 7, 11, 0.66);
+  background: rgba(33, 29, 25, 0.36);
   backdrop-filter: blur(8px);
 }
 
@@ -82,13 +82,13 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   place-items: center;
   color: var(--warning);
   background: var(--amber-soft);
-  border: 1px solid rgba(244, 195, 95, 0.18);
+  border: 1px solid rgba(169, 105, 28, 0.18);
 }
 
 .dialog-icon.danger {
   color: var(--critical);
   background: var(--critical-soft);
-  border-color: rgba(239, 123, 123, 0.2);
+  border-color: rgba(168, 58, 50, 0.2);
 }
 
 .dialog-title {

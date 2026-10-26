@@ -204,21 +204,21 @@ onBeforeUnmount(() => {
   max-width: 620px;
   border-radius: 16px 16px 5px 16px;
   padding: 10px 14px;
-  background: linear-gradient(135deg, rgba(94, 234, 212, 0.12), rgba(139, 149, 248, 0.1));
-  border: 1px solid rgba(94, 234, 212, 0.12);
+  background: linear-gradient(135deg, rgba(180, 74, 38, 0.12), rgba(95, 107, 82, 0.1));
+  border: 1px solid rgba(180, 74, 38, 0.12);
 }
 
 .user-text {
   font-size: 13px;
   line-height: 1.65;
-  color: #eafffb;
+  color: #fffaf5;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .user-time {
   font-size: 8.5px;
-  color: rgba(154, 171, 192, 0.55);
+  color: rgba(41, 37, 36, 0.55);
   text-align: right;
   margin-top: 3px;
   font-variant-numeric: tabular-nums;
@@ -238,9 +238,9 @@ onBeforeUnmount(() => {
   border-radius: 10px;
   display: grid;
   place-items: center;
-  color: #06201c;
-  background: linear-gradient(140deg, var(--mint-bright), #9ba5fa);
-  box-shadow: 0 0 20px rgba(94, 234, 212, 0.14);
+  color: #fffaf5;
+  background: linear-gradient(140deg, var(--mint-bright), #98a387);
+  box-shadow: 0 0 20px rgba(180, 74, 38, 0.14);
   margin-top: 2px;
 }
 
@@ -271,14 +271,14 @@ onBeforeUnmount(() => {
   color: var(--text-4);
   padding: 1px 5px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(41, 37, 36, 0.035);
   border: 1px solid var(--line);
 }
 
 .mode-badge.llm {
   color: var(--indigo);
   background: var(--indigo-soft);
-  border-color: rgba(139, 149, 248, 0.16);
+  border-color: rgba(95, 107, 82, 0.16);
 }
 
 .msg-status {
@@ -286,7 +286,7 @@ onBeforeUnmount(() => {
   padding: 1px 5px;
   border-radius: 4px;
   color: var(--text-3);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(41, 37, 36, 0.03);
 }
 
 .msg-status.good {
@@ -321,17 +321,17 @@ onBeforeUnmount(() => {
 .assistant-bubble {
   border-radius: 5px 16px 16px 16px;
   padding: 11px 14px;
-  background: rgba(15, 25, 37, 0.6);
-  border: 1px solid rgba(148, 178, 209, 0.09);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 253, 249, 0.82);
+  border: 1px solid rgba(41, 37, 36, 0.09);
+  box-shadow: 0 10px 28px rgba(60, 45, 30, 0.05);
 }
 
 .assistant-bubble.streaming {
-  border-color: rgba(94, 234, 212, 0.13);
+  border-color: rgba(180, 74, 38, 0.13);
 }
 
 .assistant-bubble.failed {
-  border-color: rgba(239, 123, 123, 0.16);
+  border-color: rgba(168, 58, 50, 0.16);
 }
 
 .answer-text {
@@ -395,7 +395,7 @@ onBeforeUnmount(() => {
   gap: 5px;
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px solid rgba(239, 123, 123, 0.12);
+  border-top: 1px solid rgba(168, 58, 50, 0.12);
   color: var(--critical);
   font-size: 10px;
   line-height: 1.5;
@@ -419,7 +419,7 @@ onBeforeUnmount(() => {
 .clarify-chip {
   padding: 4px 9px;
   border-radius: 6px;
-  border: 1px solid rgba(94, 234, 212, 0.16);
+  border: 1px solid rgba(180, 74, 38, 0.16);
   background: var(--mint-soft);
   color: var(--mint);
   font-size: 10px;
@@ -428,7 +428,7 @@ onBeforeUnmount(() => {
 
 .clarify-chip:hover:not(:disabled) {
   background: var(--mint);
-  color: #06211d;
+  color: #fffaf5;
 }
 
 .clarify-chip:disabled {
@@ -464,7 +464,7 @@ onBeforeUnmount(() => {
 .msg-action:hover,
 .msg-action.active {
   color: var(--text-2);
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(41, 37, 36, 0.035);
 }
 
 .message-foot-time {
